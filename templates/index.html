@@ -12,7 +12,32 @@
         <button>Submit</button>
     </form>
 </div>
-{% endblock %}
+
+<div class ="todo-container">
+    <h2>
+        {{cnt}} Pending todos
+    </h2>
+    {% if cnt !=0 %}
+    {% for  todo in todos %}
+    <div class="todo-card">
+        <div class="todo-content">
+            <a href="/complete">{{todo.title}}</a>
+        </div>
+        <div class="btn-box" id="complete" type="button">
+            <a href="{{url_for('complete_todo',todo_id=todo.id)}}">
+                Mark as complete
+            </a>
+        </div>
+        <div class="btn-box" id="delete" type="button">
+            <a href="{{ url_for('delete_todo',todo_id=todo.id) }}">
+                Delete Todo
+            </a>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{%endblock %}
 {% block script %}
 <script src="{{ url_for('static' , filename='/js/index.js') }}"></script>
 {% endblock %}
